@@ -21,7 +21,7 @@ import { ADD_FEATURE, REMOVE_FEATURE } from "../actions/vehicleActions";
     console.log(state, action)
     switch(action.type) {
       case ADD_FEATURE:
-        const featuresLeft = state.additionalFeatures.filter(feature => {
+        const remainingFeatures = state.additionalFeatures.filter(feature => {
           return feature.id !== action.payload.id
         })
         return {
@@ -31,7 +31,7 @@ import { ADD_FEATURE, REMOVE_FEATURE } from "../actions/vehicleActions";
             ...state.car,
             features: [...state.car.features, action.payload]
           },
-          additionalFeatures: [...featuresLeft]
+          additionalFeatures: remainingFeatures
         };
       case REMOVE_FEATURE:
         const removedFeatures = state.car.features.filter(feature => {
@@ -42,7 +42,7 @@ import { ADD_FEATURE, REMOVE_FEATURE } from "../actions/vehicleActions";
           additionalPrice: state.additionalPrice - action.payload.price,
           car: {
             ...state.car,
-            features: [...removedFeatures]
+            features: removedFeatures
           },
           additionalFeatures: [...state.additionalFeatures, action.payload]
         }
