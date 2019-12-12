@@ -29,7 +29,7 @@ import { ADD_FEATURE, REMOVE_FEATURE } from "../actions/vehicleActions";
           additionalPrice: state.additionalPrice + action.payload.price,
           car: {
             ...state.car,
-            features: [...state.car.features, action.payload]
+            features: state.car.features.concat(action.payload)
           },
           additionalFeatures: remainingFeatures
         };
@@ -44,7 +44,7 @@ import { ADD_FEATURE, REMOVE_FEATURE } from "../actions/vehicleActions";
             ...state.car,
             features: removedFeatures
           },
-          additionalFeatures: [...state.additionalFeatures, action.payload]
+          additionalFeatures: state.additionalFeatures.concat(action.payload)
         }
         default:
             return state;
